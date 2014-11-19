@@ -14,8 +14,8 @@ exports.create = function(request, reply){
 };
 
 exports.update = function(request, reply){
-    Task.update(request.params.id, request.payload, function(){
-        reply('success');
+    Task.update(request.params.id, request.payload, function(err, task){
+        reply(task);
     });
 };
 exports.remove = function(request, reply){

@@ -7,7 +7,7 @@ var schema = new mongoose.Schema({name: String, color: String});
 var Priority = mongoose.model('Priority', schema);
 
 Priority.add = function(obj){
-    return Priority.create(obj);
+  return Priority.create(obj);
 };
 
 Priority.show = function(cb){

@@ -27,7 +27,6 @@ Task.add = function(o){
 };
 
 Task.update = function(id, updatedInfo, cb){
-    console.log(updatedInfo);
     Task.findByIdAndUpdate(id, updatedInfo, cb);
 };
 

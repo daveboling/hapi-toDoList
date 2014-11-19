@@ -11,33 +11,14 @@ var priorities = require('./controllers/priorities');
 
 
 //HOME ROUTES
-server.route({
-    config: {
-        description: 'This is the default home page.'
-    },
-    method: 'GET',
-    path: '/',
-    handler: home.index
-});
-
-server.route({
-    method: 'GET',
-    path: '/about',
-    handler: home.about
-});
+server.route({ method: 'GET', path: '/',      handler: home.index },
+             { method: 'GET', path: '/about', handler: home.about }
+);
 
 //TASK ROUTES
-server.route({
-    method: 'GET',
-    path: '/tasks',
-    handler: tasks.all
-});
-
-server.route({
-    method: 'POST',
-    path: '/tasks',
-    handler: tasks.create
-});
+server.route({method: 'GET', path: '/tasks',  handler: tasks.all},
+             {method: 'POST', path: '/tasks', handler: tasks.create}
+);
 
 server.route({
     method: 'PUT',
@@ -71,24 +52,8 @@ server.route({
     handler: priorities.show
 });
 
-
-
 //Loading plugins and THEN running a server
-server.pack.register(
-    [
-        {
-            plugin: require('good'),
-            options: {
-                reporters: [{
-                    reporter: require('good-console'),
-                    args:[{ log: '*', request: '*' }]
-                }]
-            }
-        },
-        {
-            plugin: require('lout')
-        }
-    ], startServer);
+server.pack.register(require('./plugins'), startServer);
 
 //start hapi server
 function startServer(err){
